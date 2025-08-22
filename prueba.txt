@@ -1,0 +1,31 @@
+const axios = require('axios');
+
+/**
+ * Envía un correo electrónico usando una API externa.
+ * @param {string} to - Destinatario del correo.
+ * @param {string} subject - Asunto del correo.
+ * @param {string} body - Cuerpo del correo.
+ * @returns {Promise} - Promesa con la respuesta de la API.
+ */
+async function enviarCorreo(to, subject, body) {
+    try {
+        const response = await axios.post('https://api.tu-servicio-correo.com/send', {
+            to,
+            subject,
+            body
+        }, {
+            headers: {
+                'Authorization': 'Bearer TU_API_KEY',
+                'Content-Type': 'application/json'
+            }
+        });
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
+
+// Ejemplo de uso:
+// enviarCorreo('destinatario@correo.com', 'Asunto', 'Mensaje')
+//   .then(res => console.log(res))
+//   .catch(err => console.error(err));
